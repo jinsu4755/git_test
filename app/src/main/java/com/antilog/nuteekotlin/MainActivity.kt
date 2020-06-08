@@ -5,47 +5,48 @@ import android.os.Bundle
 import android.util.Log
 
 class MainActivity : AppCompatActivity() {
-    //lateinit var 은 여기
-    lateinit var lastname:String
-    lateinit var firstname:String
-
+    //lateinit var
+    lateinit var lastName:String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //변수는 여기
-        me(21)
-        score(80)
-        score(10)
-        greeting(3)
+        //변수
+        val year=2018 //연도
 
+        lastName="Lim"  //성
+        val status:Int=1  //1이면 재학, 0이면 휴학
+
+        testIf(status)
+        testLoop(year)
+        testwhen(lastName)
     }
 
-    //함수는 여기
-    fun me(age:Int?){
-        this.lastname = "Bae"
-        this.firstname = "eunseo"
-
-        Log.d("name", "name : $lastname $firstname")
-        if(age==null){
-            println("나이를 입력해주세요.")
-        }
+    //함수
+    //if문 테스트
+    fun testIf(status:Int?){
+        if(status==1)
+            Log.d("status", "재학 중 입니다.")
         else
-            Log.d("age", "age : $age")
+            Log.d("status","휴학 중 입니다.")
     }
 
-    fun score(num: Int){
-        when (num) {
-            in 50..100 -> Log.d("score", "${num}점이네요. 참 잘했어요~")
-            in 0..50 -> Log.d("score", "${num}점이네요. 좀만 더 노력하세요.")
+    //반복문 테스트
+    fun testLoop(year:Int){
+        for(i:Int in 1..4) {
+            Log.d("class", " ${year+i} $i 학년입니다.")
         }
     }
-
-    fun greeting(meet: Int){
-        for(i:Int in 1..meet){
-                Log.d("hi", "${i}번째 Hello")
+    //When 테스트
+    fun testwhen(lastName:String?){
+        when (lastName) {
+            "Lim" -> Log.d("name", "임윤휘")
+            "Bae" -> Log.d("name", "배은서")
+            "Park" -> Log.d("name", "박진수")
+            else -> {
+                Log.d("name", "blank")
             }
+        }
     }
 }
-
