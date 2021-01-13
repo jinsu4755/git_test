@@ -55,12 +55,6 @@ jobs:
         with:
           path: app/build/outputs
 
-      # - name: Rename Debug apk name
-      #   if: ${{ success() }}
-      #   run: |
-      #     mv app/build/outputs/apk/debug/app-debug.apk 미닝-Debug.apk
-      #     echo `apk=미닝-Debug.apk` >> $GITHUB_ENV
-
       - name: On success, Notify in Slack
         if: ${{ success() }}
         uses: rtCamp/action-slack-notify@v2
@@ -70,21 +64,11 @@ jobs:
           MSG_MINIMAL: true
           SLACK_MESSAGE: 'apk가 생성되었습니다.'
 
-      - name: Upload to slack step
-        uses: MeilCli/slack-upload-file@v1
-        id: message
-        with:
-          slack_token: ${{ secrets.SLACK_BOT_TOKEN }}
-          channels: ${{ secrets.SLACK_CHANNEL_ID }}
-          file_path: 'app/build/outputs/apk/debug/app-debug.apk'
-          file_name: '미닝-Debug.apk'
-          file_type: 'apk'
-
-      # - name: Upload APK at Slack
-      #   if: ${{ success() }}
-      #   run: |
-      #    curl -X POST \
-      #    -F file=@app/build/outputs/apk/debug/app-debug.apk \
-      #    -F channels=${{secrets.SLACK_CHANNEL_ID}} \
-      #    -H "Authorization: Bearer ${{secrets.SLACK_BOT_TOKEN}}" \
-      #    https://slack.com/api/files.upload
+      - name: Upload APK at Slack
+        if: ${{ success() }}
+        run: |
+         curl -X POST \
+         -F file=@app/build/outputs/apk/debug/app-debug.apk \
+         -F channels=${{secrets.SLACK_CHANNEL_ID}} \
+         -H "Authorization: Bearer ${{secrets.SLACK_BOT_TOKEN}}" \
+         https://slack.com/api/files.upload
