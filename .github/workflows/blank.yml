@@ -71,11 +71,15 @@ jobs:
           SLACK_MESSAGE: 'apk가 생성되었습니다.'
 
       - name: Upload to slack step
-        uses: adrey/slack-file-upload-action@master
+        uses: MeilCli/slack-upload-file@v1
+        id: message
         with:
-          token: ${{ secrets.SLACK_BOT_TOKEN }}
-          path: app/build/outputs/apk/debug/app-debug.apk
-          channel: ${{secrets.SLACK_CHANNEL_ID}}
+          slack_token: ${{ secrets.SLACK_BOT_TOKEN }}
+          channels: ${{ secrets.SLACK_CHANNEL_ID }}
+          file_path: 'message.txt'
+          file_name: 'message.txt'
+          file_type: 'text'
+          initial_comment: 'post by slack-upload-file'
 
       # - name: Upload APK at Slack
       #   if: ${{ success() }}
