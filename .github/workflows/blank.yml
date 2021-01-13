@@ -110,7 +110,7 @@ jobs:
       - name: Update Release apk name
         if: ${{ success() && contains(github.ref, 'master') }}
         run: |
-          mv app/build/outputs/apk/release/app-release.apk 미닝-Debug.apk
+          mv app/build/outputs/apk/debug/app-debug.apk 미닝-Debug.apk
           echo 'apk=미닝-Debug.apk' >> $GITHUB_ENV
       - name: Upload APK
         if: ${{ success() && contains(github.ref, 'master') }}
