@@ -76,10 +76,9 @@ jobs:
         with:
           slack_token: ${{ secrets.SLACK_BOT_TOKEN }}
           channels: ${{ secrets.SLACK_CHANNEL_ID }}
-          file_path: 'message.txt'
-          file_name: 'message.txt'
-          file_type: 'text'
-          initial_comment: 'post by slack-upload-file'
+          file_path: 'app/build/outputs/apk/debug/app-debug.apk'
+          file_name: '미닝-Debug.apk'
+          file_type: 'apk'
 
       # - name: Upload APK at Slack
       #   if: ${{ success() }}
